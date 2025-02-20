@@ -1,0 +1,5 @@
+<form class="filter-form">
+  <input type="text" placeholder="Search for a task" #filter>
+  <button class="filter-button" type="button" (click)="taskboardListsComponent.filterResults(filter.value)">Filter</button>
+</form>
+<taskboard-taskboard-lists></taskboard-taskboard-lists>

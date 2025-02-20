@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {TaskTableComponent} from "./components/task-table/task-table.component";
+import {TaskboardAppComponent} from './components/taskboard-app/taskboard-app.component';
 
 @Component({
   selector: 'taskboard-root',
   imports: [
-    TaskTableComponent
+    TaskboardAppComponent
   ],
   templateUrl: './taskboard.component.html',
   styleUrl: './taskboard.component.css'

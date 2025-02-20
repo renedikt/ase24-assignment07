@@ -1,0 +1,58 @@
+<div cdkDropListGroup class="taskboard-lists">
+  <div cdkDropList
+       [cdkDropListData]="tasksToDo"
+       class="list"
+       [id]="TaskDto.StatusEnum.TODO"
+       (cdkDropListDropped)="drop($event)">
+    <h2>To Do</h2>
+
+    @for (task of tasksToDo; track task) {
+      <div class="task" cdkDrag [cdkDragData]="task">
+        <h4 class="task-title">{{ task.title }}</h4>
+        <div class="task-description">{{ task.description }}</div>
+        @if (task.assignee != null) {
+          <br>
+          <div class="task-assignee">- {{ task.assignee?.name }}</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div cdkDropList
+       [cdkDropListData]="tasksDoing"
+       class="list"
+       [id]="TaskDto.StatusEnum.DOING"
+       (cdkDropListDropped)="drop($event)">
+    <h2>Doing</h2>
+
+    @for (task of tasksDoing; track task) {
+      <div class="task" cdkDrag [cdkDragData]="task">
+        <h4 class="task-title">{{ task.title }}</h4>
+        <div class="task-description">{{ task.description }}</div>
+        @if (task.assignee != null) {
+          <br>
+          <div class="task-assignee">- {{ task.assignee?.name }}</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div cdkDropList
+       [cdkDropListData]="tasksDone"
+       class="list"
+       [id]="TaskDto.StatusEnum.DONE"
+       (cdkDropListDropped)="drop($event)">
+    <h2>Done</h2>
+
+    @for (task of tasksDone; track task) {
+      <div class="task" cdkDrag [cdkDragData]="task">
+        <h4 class="task-title">{{ task.title }}</h4>
+        <div class="task-description">{{ task.description }}</div>
+        @if (task.assignee != null) {
+          <br>
+          <div class="task-assignee">- {{ task.assignee?.name }}</div>
+        }
+      </div>
+    }
+  </div>
+</div>
