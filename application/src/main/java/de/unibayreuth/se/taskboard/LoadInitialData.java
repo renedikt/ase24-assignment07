@@ -32,12 +32,14 @@ class LoadInitialData implements InitializingBean {
         List<User> users = TestFixtures.createUsers(userService);
         List<Task> tasks = TestFixtures.createTasks(taskService);
 
+        // Cycle through the users and assign them to tasks
+        int userIndex = 0;
         for (Task task : tasks) {
-            if (Math.random() < 0.2) {
-                continue;
+            if (userIndex < users.size()) {
+                task.setAssigneeId(users.get(userIndex).getId());
+                taskService.upsert(task);
             }
-            task.setAssigneeId(users.get((int) (Math.random() * users.size())).getId());
-            taskService.upsert(task);
+            userIndex = (userIndex + 1) % (users.size() + 1);
         }
     }
 }
