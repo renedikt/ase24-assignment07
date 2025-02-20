@@ -1,6 +1,7 @@
 package de.unibayreuth.se.taskboard;
 
 import de.unibayreuth.se.taskboard.business.domain.Task;
+import de.unibayreuth.se.taskboard.business.domain.TaskStatus;
 import de.unibayreuth.se.taskboard.business.domain.User;
 import de.unibayreuth.se.taskboard.business.ports.TaskService;
 import de.unibayreuth.se.taskboard.business.ports.UserService;
@@ -40,6 +41,24 @@ class LoadInitialData implements InitializingBean {
                 taskService.upsert(task);
             }
             userIndex = (userIndex + 1) % (users.size() + 1);
+        }
+
+        // Cycle through the tasks and set status
+        int statusIndex = 0;
+        for (Task task : tasks) {
+            switch (statusIndex) {
+                case 0:
+                    task.setStatus(TaskStatus.TODO);
+                    break;
+                case 1:
+                    task.setStatus(TaskStatus.DOING);
+                    break;
+                case 2:
+                    task.setStatus(TaskStatus.DONE);
+                    break;
+            }
+            taskService.upsert(task);
+            statusIndex = (statusIndex + 1) % 3;
         }
     }
 }
